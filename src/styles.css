@@ -13,8 +13,8 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: var(--apex-color-canvas, #f3f9f7);
-  color: var(--apex-color-text, #12251f);
+  background: var(--apex-color-canvas);
+  color: var(--apex-color-text);
 }
 
 button,
@@ -24,28 +24,55 @@ select {
   font: inherit;
 }
 
-.app-shell {
+apex-alert,
+apex-card,
+apex-chart,
+apex-data-grid,
+apex-data-table,
+apex-empty-state,
+apex-paper,
+apex-workflow-board {
+  display: block;
+  min-width: 0;
+}
+
+.site-shell {
   min-height: 100vh;
   background: var(--apex-color-canvas);
   color: var(--apex-color-text);
 }
 
-.app-shell > apex-app-bar {
+.site-shell > apex-app-bar {
   position: sticky;
   top: 0;
   z-index: 20;
 }
 
-.app-layout {
+.top-nav,
+.action-row,
+.snapshot-header,
+.identity-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--apex-space-3);
+  align-items: center;
+  min-width: 0;
+}
+
+.top-nav {
+  justify-content: flex-end;
+}
+
+.site-layout {
   display: grid;
-  grid-template-columns: minmax(16rem, 19rem) minmax(0, 1fr);
+  grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
   gap: var(--apex-space-6);
   width: min(100%, 96rem);
   margin: 0 auto;
   padding: var(--apex-space-6);
 }
 
-.app-sidebar {
+.site-sidebar {
   display: grid;
   align-content: start;
   gap: var(--apex-space-4);
@@ -54,16 +81,22 @@ select {
   min-width: 0;
 }
 
-.app-main {
+.site-main,
+.section-stack,
+.operations-snapshot {
   display: grid;
-  gap: var(--apex-space-6);
+  gap: var(--apex-space-5);
   min-width: 0;
 }
 
-.hero-grid,
+.mobile-nav {
+  display: none;
+}
+
+.hero-band,
 .split-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
   gap: var(--apex-space-5);
   align-items: stretch;
   min-width: 0;
@@ -73,39 +106,35 @@ select {
   display: grid;
   align-content: center;
   min-height: 24rem;
-  padding: var(--apex-space-8) 0;
+  padding-block: var(--apex-space-7);
 }
 
-.panel-grid,
-.atomic-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--apex-space-5);
-  min-width: 0;
-}
-
-.section-stack,
-.metric-stack {
-  display: grid;
-  gap: var(--apex-space-5);
-  min-width: 0;
-}
-
+.page-header,
 .section-heading {
   display: flex;
-  gap: var(--apex-space-4);
-  align-items: center;
   justify-content: space-between;
+  gap: var(--apex-space-5);
+  align-items: flex-start;
   min-width: 0;
 }
 
-.app-actions,
-.inline-cluster {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--apex-space-3);
-  align-items: center;
+.page-header > apex-stack,
+.hero-copy > apex-stack {
+  max-width: 68ch;
+}
+
+.content-grid {
+  display: grid;
+  gap: var(--apex-space-5);
   min-width: 0;
+}
+
+.content-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.content-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .form-grid {
@@ -116,45 +145,65 @@ select {
 }
 
 .form-grid apex-textarea,
-.form-grid apex-file-upload {
+.form-grid apex-file-upload,
+.form-actions {
   grid-column: 1 / -1;
 }
 
-@media (max-width: 1100px) {
-  .app-layout {
+.form-actions {
+  padding-block-start: var(--apex-space-2);
+}
+
+@media (max-width: 1120px) {
+  .site-layout {
     grid-template-columns: 1fr;
   }
 
-  .app-sidebar {
+  .site-sidebar {
     position: static;
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.6fr);
   }
 
-  .panel-grid,
-  .atomic-grid {
+  .content-grid.three {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 760px) {
-  .app-layout {
+@media (max-width: 820px) {
+  .top-nav,
+  .site-sidebar {
+    display: none;
+  }
+
+  .site-layout {
     padding: var(--apex-space-4);
   }
 
-  .app-sidebar,
-  .hero-grid,
+  .site-main {
+    padding-block-end: var(--apex-space-8);
+  }
+
+  .mobile-nav {
+    display: block;
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+  }
+
+  .hero-band,
   .split-grid,
-  .panel-grid,
-  .atomic-grid,
+  .content-grid.two,
+  .content-grid.three,
   .form-grid {
     grid-template-columns: 1fr;
   }
 
   .hero-copy {
     min-height: auto;
-    padding: var(--apex-space-6) 0;
+    padding-block: var(--apex-space-5);
   }
 
+  .page-header,
   .section-heading {
     align-items: stretch;
     flex-direction: column;
